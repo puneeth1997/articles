@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+
+	before_action  :get_article, only:[:show, :edit, :update, :destroy]
 	def new
 		@article = Article.new
 	end
@@ -16,21 +18,38 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find_by(id: params[:id])
+		
 	end	
 
 	def index
 		@articles = Article.all
 	end
 
+	def edit
+	
+	end
 
+	def destroy
+		@article.destroy
+		redirect_to articles_path
+	end
+	def update
+		
+		if @article.update(article_params)
+			redirect_to article_path(@article.id)
 
-
+		else
+			render 'edit'
+		end
+	end
 	private
 
 	def article_params
 		params.require(:article).permit(:title, :text)
 	end
 
+	def get_article
+		@article = Article.find_by(id: params[:id])
+	end
 
 end
