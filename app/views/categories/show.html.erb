@@ -1,0 +1,26 @@
+<h2>Showing category</h2>
+<p> 
+	<strong>Name:</strong>
+	<%= @category.name %>
+
+</p>
+
+
+
+<h2> create article</h2>
+<%= form_with scope: :article, url: articles_path(category: @category.id), method: :post, local: true do |form| %>
+	<p>
+		<%= form.label :title %><br>
+		<%= form.text_field :title %>
+	</p>
+
+	<p>
+		<%= form.label :text %><br>
+		<%= form.text_area :text %>
+	</p>
+
+	<p>
+		<%= form.submit %>
+	</p>
+
+<% end %>

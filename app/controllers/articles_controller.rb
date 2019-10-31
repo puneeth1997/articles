@@ -2,19 +2,19 @@ class ArticlesController < ApplicationController
 
 	before_action  :get_article, only:[:show, :edit, :update, :destroy]
 	def new
+		@categories= Category.all
 		@article = Article.new
 	end
 
 	def create
-		@article = Article.new(article_params)
+		@category = Category.find_by(id: params[:article][:category_id])
+		@article = @category.articles.new(article_params)
 		if @article.save
 			redirect_to article_path(@article.id)
 
 		else
 			render 'new'
 		end
-
-		
 	end
 
 	def show

@@ -1,0 +1,16 @@
+<h1>Listing all categories</h1>
+<table>
+	<tr>
+		<th>Category</th>
+		<th></th>
+	</tr>
+	<% @categories.each do |category| %>
+		<tr>
+			<td><%= category.name %></td>
+			<td><%= link_to "show", category_path(category.id) %></td>
+			
+		</tr>
+
+	<% end %>
+</table>
+<%= link_to "home", welcome_index_path %>
